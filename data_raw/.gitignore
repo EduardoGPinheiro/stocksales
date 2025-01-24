@@ -1,0 +1,105 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency Directories
+node_modules/
+vendor/
+
+# Python Files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+.env/
+*.venv
+
+# Environment Variables
+.env
+.env.*.local
+
+# IDE/Editor Settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux Files
+*~
+.nfs*
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.tar.bz2
+
+# Compiled Code
+*.class
+*.o
+*.so
+*.dll
+*.exe
+
+# Java
+*.jar
+*.war
+*.ear
+
+# C++
+*.out
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Audio/Video
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+
+# Text Files
+*.txt
+*.TXT
+*.doc
+*.docx
+*.pdf
