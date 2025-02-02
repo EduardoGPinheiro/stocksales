@@ -66,6 +66,7 @@ $RECYCLE.BIN/
 *.rar
 *.7z
 *.tar.bz2
+*.parquet
 
 # Compiled Code
 *.class
