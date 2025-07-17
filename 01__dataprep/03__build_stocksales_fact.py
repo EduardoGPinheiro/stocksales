@@ -1,14 +1,11 @@
-"""Build dimensions table for B3 dataset."""
-import os
-import requests
-import urllib3
+"""Data fact tables for B3 dataset."""
+import os  # noqa: I001
 import pandas as pd
-from zipfile import ZipFile
 from tqdm import tqdm
 
 # Path
 data_path = "01__dataprep/data_raw/%s"
-results_path = "01__dataprep/data_treated/dim/%s"
+results_path = "01__dataprep/data_treated/fact/%s"
 
 # Loading data
 column_names = [
@@ -78,29 +75,30 @@ for y in tqdm(range(start_year, end_year + 1)):
 
     # Build Fato table
     filter_columns = [
+        "Data Pregão",
         "Código de Negociação",
-        "Tipo de Mercado",
-        "Nome da Empresa",
-        "Especificação do Papel",
-        "Código do Papel no Sistema ISIN"
+        "Código do Papel no Sistema ISIN",
+        "Preço de Abertura",
+        "Quantidade de Títulos Negociados"
     ]
 
-    dim__b3_df = (
+    fact__b3_df = (
         b3_df[filter_columns]
-        .drop_duplicates()
+        .copy()
         .rename(
             columns={
-                "Tipo de Mercado": "market_type",
+                "Data Pregão": "time",
                 "Código de Negociação": "negotiation_cd",
                 "Código do Papel no Sistema ISIN": "isin_cd",
-                "Especificação do Papel": "paper_specification",
-                "Nome da Empresa": "enterprise_nm"
+                "Preço de Abertura": "price",
+                "Quantidade de Títulos Negociados": "quantity"
             }
         )
         .dropna()
         .set_index(['negotiation_cd', 'isin_cd'])
-        .reset_index())
+        .reset_index()
+    )
 
     # Saving results
-    dim__b3_df.to_parquet(
-        results_path % "dim__A{year}.parquet".format(year=y))
+    fact__b3_df.to_parquet(
+        results_path % "fact__A{year}.parquet".format(year=y))
