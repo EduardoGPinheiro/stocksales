@@ -1,9 +1,5 @@
 """Build dimensions table for B3 dataset."""
-import os
-import requests
-import urllib3
 import pandas as pd
-from zipfile import ZipFile
 from tqdm import tqdm
 
 # Path

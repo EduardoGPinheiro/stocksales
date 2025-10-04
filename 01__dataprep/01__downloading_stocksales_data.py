@@ -1,4 +1,4 @@
-"""Downloading B3 historical data"""
+"""Downloading B3 historical data."""
 import os  # noqa: I001
 import requests
 import urllib3
@@ -49,6 +49,7 @@ def download_b3_series(download_url, output_dir):
         os.remove(zip_file_path)
     except Exception as e:
         print(f"Error while processing download: {e}")
+
 
 if __name__ == "__main__":
     start_year = 2010

@@ -1,0 +1,77 @@
+---
+title: "B3 Time Series Analysis"
+author: "Eduardo G. Pinheiro"
+date: "2025-10-04"
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      collapsed: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      fig.align = "center", fig.pos = "H", prompt = TRUE,
+                      tidy = TRUE)
+```
+
+```{r packages}
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(pROC)
+library(cowplot)
+library(scales)
+library(arrow)
+library(tidyr)
+
+# Instale e carregue o pacote
+if (!requireNamespace("showtext", quietly = TRUE)) install.packages("showtext")
+library(showtext)
+
+# Registre e ative o suporte à fonte Montserrat
+font_add_google("Montserrat", "montserrat")
+showtext_auto()
+
+# Scales
+number_labels = scales::label_number(
+  scale = 1, scale_cut = cut_long_scale(), accuracy = 1)
+
+# Colors 
+blue <- rgb(32, 114, 184, maxColorValue = 255)
+red <- rgb(237, 0, 0, maxColorValue = 255)
+```
+
+```{r loading-data}
+# Path
+origin_path = "01__dataprep/data_treated/"
+
+# Loading data
+model_matrix = read_parquet(file.path(origin_path, "modelmatrix.parquet"))
+```
+
+```{r build-analysis-dataframes}
+returns_df = model_matrix |>
+  reshape2::melt(id.vars='time') |>
+  mutate(cumulative_returns = exp(value)) |>
+  group_by(variable) |>
+  mutate(cumulative_returns = cumprod(cumulative_returns) - 1) |>
+  ungroup()
+```
+
+```{r global-time-series-analysis}
+p1 = returns_df |>
+  ggplot(aes(x = time, y = value, group = variable)) +
+  geom_line()
+
+p2 = returns_df |>
+  ggplot(aes(x = time, y = cumulative_returns, group = variable)) +
+  geom_line()
+
+grid_p = plot_grid(p1, p2, ncol=1)
+grid_p
+```
+
+
+

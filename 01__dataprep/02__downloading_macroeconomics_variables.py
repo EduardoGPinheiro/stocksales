@@ -1,8 +1,8 @@
 """Download Bacen macroeconomics variables time series."""
+from datetime import datetime, timedelta
+
 import pandas as pd
 import requests
-from datetime import datetime
-from datetime import timedelta
 
 # Arguments
 initial_date = (datetime.today() - timedelta(days=365 * 10))
@@ -21,7 +21,7 @@ url_dict = {
     ),
     "ibovespa": (
         bcb_url +
-        "bcdata.sgs.7/dados?formato=json" +
+        "bcdata.sgs.7832/dados?formato=json" +
         "&dataInicial={initial_date}"
         .format(initial_date=formated_initial_date)
     )
@@ -32,7 +32,7 @@ bacen_lst = []
 for key in url_dict.keys():
     url = url_dict.get(key)
 
-    response = requests.get(url)
+    response = requests.get(url)  # noqa: S113
     data = response.json()
     bacen_dfi = pd.DataFrame(data).assign(variable=key)
     bacen_lst.append(bacen_dfi)

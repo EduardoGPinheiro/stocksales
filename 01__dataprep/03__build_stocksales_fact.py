@@ -1,5 +1,4 @@
 """Data fact tables for B3 dataset."""
-import os  # noqa: I001
 import pandas as pd
 from tqdm import tqdm
 
