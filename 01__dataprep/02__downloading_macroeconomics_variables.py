@@ -24,6 +24,12 @@ url_dict = {
         "bcdata.sgs.7832/dados?formato=json" +
         "&dataInicial={initial_date}"
         .format(initial_date=formated_initial_date)
+    ),
+    "dollar": (
+        bcb_url +
+        "bcdata.sgs.1/dados?formato=json" +
+        "&dataInicial={initial_date}"
+        .format(initial_date=formated_initial_date)
     )
 }
 

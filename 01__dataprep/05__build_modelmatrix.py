@@ -1,7 +1,6 @@
 """Build model matrix with B3 data."""
 import numpy as np
 import pandas as pd
-from datetime import datetime
 
 # Path
 data_fact_path = "01__dataprep/data_treated/fact/%s"
